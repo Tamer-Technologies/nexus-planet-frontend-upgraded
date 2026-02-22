@@ -1,5 +1,6 @@
 import { PointMaterial, Points } from "@react-three/drei";
-import { ComponentProps, useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
+import { ComponentProps, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 interface Stars3DProps extends ComponentProps<"group"> {
@@ -8,6 +9,8 @@ interface Stars3DProps extends ComponentProps<"group"> {
   size?: number;
   noOfPoints?: number;
   maxRange?: number;
+  animate?: boolean;
+  speed?: number;
 }
 
 const Stars3D = ({
@@ -16,6 +19,8 @@ const Stars3D = ({
   size = 0.05,
   noOfPoints = 100,
   maxRange = 20,
+  animate = false,
+  speed = 0,
   ...props
 }: Stars3DProps) => {
   const [positions, colors] = useMemo(() => {
@@ -40,8 +45,16 @@ const Stars3D = ({
     return [positions, colors];
   }, [intensity, colorsList, noOfPoints, maxRange]);
 
+  const starsRef = useRef<THREE.Group>(null);
+
+  useFrame((_, delta) => {
+    if (!animate || !starsRef.current) return;
+
+    starsRef.current.rotation.y += delta * speed;
+  });
+
   return (
-    <group {...props}>
+    <group {...props} ref={starsRef}>
       <Points
         positions={positions}
         colors={colors}
