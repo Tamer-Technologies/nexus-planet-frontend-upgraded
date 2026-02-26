@@ -10,6 +10,7 @@ import gsap from "gsap";
 const HomeScene3D = () => {
   const { progress } = useProgress();
   const loadingLayerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -21,11 +22,14 @@ const HomeScene3D = () => {
         });
       }
     },
-    { dependencies: [progress] },
+    { scope: containerRef, dependencies: [progress] },
   );
 
   return (
-    <div className="scroll-container relative w-full h-[1000svh] bg-black">
+    <div
+      className="scroll-container relative w-full h-[1000svh] bg-black"
+      ref={containerRef}
+    >
       <div
         ref={loadingLayerRef}
         className="fixed inset-0 bg-black z-50 flex justify-center items-center"

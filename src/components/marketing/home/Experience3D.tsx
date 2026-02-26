@@ -1,6 +1,6 @@
 "use client";
 
-import { PerspectiveCamera, useCursor } from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,7 +22,6 @@ export const Experience = () => {
     animationStateRef,
   } = useHomeAnim();
   const [hovered, setHovered] = useState(false);
-  useCursor(hovered);
 
   useFrame((_, delta) => {
     if (environmentGroupRef.current) {
