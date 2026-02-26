@@ -8,13 +8,13 @@ interface Stars3DProps extends ComponentProps<"group"> {
   size?: number;
   noOfPoints?: number;
   maxRange?: number;
-  animate?: boolean;
-  speed?: number;
 }
+
+const DEFAULT_COLORS = ["#FFCF68", "#FF7E7E"];
 
 const Stars3D = ({
   intensity = 1,
-  colorsList = ["#FFCF68", "#FF7E7E"],
+  colorsList = DEFAULT_COLORS,
   size = 0.05,
   noOfPoints = 100,
   maxRange = 20,
