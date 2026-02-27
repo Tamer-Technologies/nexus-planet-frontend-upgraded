@@ -6,6 +6,7 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Experience } from "./Experience3D";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { Progress } from "@/components/ui/progress";
 
 const HomeScene3D = () => {
   const { progress } = useProgress();
@@ -32,11 +33,12 @@ const HomeScene3D = () => {
     >
       <div
         ref={loadingLayerRef}
-        className="fixed inset-0 bg-black z-50 flex justify-center items-center"
+        className="fixed inset-0 bg-black  z-50 flex flex-col justify-center items-center"
       >
         <span className="font-bold text-8xl text-primary">
           {progress.toFixed(0)}%
         </span>
+        <Progress value={progress} className="w-[60%] max-w-200" />
       </div>
 
       <div className="fixed inset-0 z-0">
