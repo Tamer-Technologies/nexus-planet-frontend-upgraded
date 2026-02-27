@@ -9,7 +9,7 @@ interface SpeedLines3dProps extends ComponentProps<"mesh"> {
 
 const SpeedLines3d = ({
   hovered,
-  cylinderArgs = [1.5, 1.5, 4, 32, 1, true],
+  cylinderArgs = [1.5, 1.5, 3, 32, 1, true],
   ...props
 }: SpeedLines3dProps) => {
   const shaderRef = useRef<THREE.ShaderMaterial>(null);
@@ -37,27 +37,28 @@ const SpeedLines3d = ({
         }
   
         void main() {
-          float lineId = floor(vUv.x * 50.0); 
+          float lineId = floor(vUv.x * 45.0); 
           float h = hash(lineId);
           
-          float speed = uTime * (0.1 + h * 0.1);
-          float yPos = vUv.y * 0.15 - speed + h; 
+          float speed = uTime * (0.5 + h * 0.5);
           
-          float lineShape = smoothstep(0.0, 0.1, fract(yPos)) * smoothstep(0.2, 0.1, fract(yPos));
+          float offset = h * 100.0;
+          
+          float progress = fract((vUv.y * 0.5 - speed + offset) * 0.3); 
+          
+
+          float lineShape = smoothstep(0.0, 0.02, progress) * smoothstep(0.1, 0.07, progress);
   
           vec3 c1 = vec3(1.0, 0.3, 0.1); 
           vec3 c2 = vec3(1.0, 0.6, 0.3); 
           vec3 c3 = vec3(1.0, 0.4, 0.2); 
-          
           vec3 baseColor = (h < 0.33) ? c1 : (h < 0.66 ? c2 : c3);
   
-          float glow = 4.0;
+          float edgeFade = smoothstep(0.0, 0.1, vUv.y) * smoothstep(1.0, 0.8, vUv.y);
           
-          float edgeFade = smoothstep(0.0, 0.2, vUv.y) * smoothstep(1.0, 0.8, vUv.y);
+          float finalAlpha = lineShape * edgeFade * uOpacity * (0.5 + h);
   
-          float finalAlpha = lineShape * edgeFade * uOpacity;
-  
-          gl_FragColor = vec4(baseColor * glow, finalAlpha);
+          gl_FragColor = vec4(baseColor * 5.0, finalAlpha);
         }
       `,
     }),
@@ -69,7 +70,7 @@ const SpeedLines3d = ({
       shaderRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
       shaderRef.current.uniforms.uOpacity.value = THREE.MathUtils.lerp(
         shaderRef.current.uniforms.uOpacity.value,
-        hovered ? 0.2 : 0.0,
+        hovered ? 0.15 : 0.0,
         0.1,
       );
     }

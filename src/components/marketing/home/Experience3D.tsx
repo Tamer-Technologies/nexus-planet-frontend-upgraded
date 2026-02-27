@@ -62,7 +62,7 @@ export const Experience = () => {
         <SpeedLines3d
           hovered={hovered}
           scale={1.5}
-          position={[10.25, 3.3, 0]}
+          position={[10.4, 3.6, -0.5]}
         />
       </group>
     </>
