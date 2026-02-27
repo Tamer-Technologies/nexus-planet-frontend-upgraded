@@ -50,15 +50,15 @@ export const Experience = () => {
         <Stars3D noOfPoints={1000} intensity={1.5} maxRange={30} />
       </group>
 
-      <group
-        ref={starCardContRef}
-        rotation={[0, 1, 0]}
-        scale={0.15}
-        onClick={() => handleNavigation("https://github.com/")}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <StarRepoCard ref={starCardRef} position={[11, 1.3, 0]} scale={0} />
+      <group ref={starCardContRef} rotation={[0, 1, 0]} scale={0.15}>
+        <StarRepoCard
+          ref={starCardRef}
+          position={[11, 1.3, 0]}
+          scale={0}
+          onClick={() => handleNavigation("https://github.com/")}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        />
         <SpeedLines3d
           hovered={hovered}
           scale={1.5}
