@@ -33,7 +33,7 @@ const HomeScene3D = () => {
     >
       <div
         ref={loadingLayerRef}
-        className="fixed inset-0 bg-black  z-50 flex flex-col justify-center items-center"
+        className="fixed inset-0 bg-black z-99 flex flex-col justify-center items-center"
       >
         <span className="font-bold text-8xl text-primary">
           {progress.toFixed(0)}%
@@ -52,7 +52,7 @@ const HomeScene3D = () => {
               mipmapBlur
             />
           </EffectComposer>
-          <ambientLight intensity={1} />
+          <ambientLight intensity={2} />
           <Suspense fallback={null}>
             <Experience />
           </Suspense>
