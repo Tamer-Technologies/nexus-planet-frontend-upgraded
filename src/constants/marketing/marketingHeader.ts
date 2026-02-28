@@ -6,12 +6,12 @@ type MarketingHeaderNavsProps = {
 };
 export const marketingHeaderNavs: MarketingHeaderNavsProps = {
   sections: [
-    { label: "star our repo", url: "/star-repo" },
-    { label: "features", url: "/app-features" },
-    { label: "report a bug", url: "/report-bug" },
+    { label: "star our repo", url: "/#star-repo" },
+    { label: "features", url: "/#app-features" },
+    { label: "report a bug", url: "/#report-bug" },
   ],
   ctas: [
-    { label: "sign in", url: "/sign-in" },
-    { label: "create account", url: "/sign-up" },
+    { label: "sign in", url: "/login" },
+    { label: "create account", url: "/register" },
   ],
 };

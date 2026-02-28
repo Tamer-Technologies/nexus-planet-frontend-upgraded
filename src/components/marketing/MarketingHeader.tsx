@@ -10,6 +10,7 @@ import { LinkObject } from "@/types/constants";
 import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import TransitionLink from "../utils/TransitionLink";
 
 const NavList = ({
   items,
@@ -33,7 +34,7 @@ const NavList = ({
               className,
             )}
           >
-            <Link href={item.url}>{item.label}</Link>
+            <TransitionLink href={item.url}>{item.label}</TransitionLink>
           </Button>
         </div>
       ))}
