@@ -28,12 +28,12 @@ const HomeScene3D = () => {
 
   return (
     <div
-      className="scroll-container relative w-full h-[1000svh] bg-black"
+      className="scroll-container relative w-full isolate h-[1000svh] bg-black"
       ref={containerRef}
     >
       <div
         ref={loadingLayerRef}
-        className="fixed inset-0 bg-black z-99 flex flex-col justify-center items-center"
+        className="fixed inset-0 bg-black z-50 flex flex-col justify-center items-center"
       >
         <span className="font-bold text-8xl text-primary">
           {progress.toFixed(0)}%

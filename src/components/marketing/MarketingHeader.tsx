@@ -104,7 +104,9 @@ const MarketingHeader = () => {
       className="fixed flex w-full items-center top-0 left-0 z-100 p-7 gap-5"
       ref={containerRef}
     >
-      <Logo className="-translate-y-[15%] mr-auto pointer-events-none" />
+      <TransitionLink href={"/"} className="mr-auto cursor-none">
+        <Logo className="-translate-y-[15%] pointer-events-none" />
+      </TransitionLink>
 
       <nav aria-label="Main Navigation" className="flex items-center gap-5">
         <div className="max-md:hidden flex items-center gap-5">
