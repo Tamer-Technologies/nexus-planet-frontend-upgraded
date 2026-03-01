@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Barlow_Condensed } from "next/font/google";
 import "@/app/globals.css";
+import { PageTransition } from "@/contexts/PageTransitionContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} antialiased`}
       >
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

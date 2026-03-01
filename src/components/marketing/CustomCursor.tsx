@@ -56,7 +56,7 @@ const CustomCursor = () => {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 size-8 border-white/50 border-2 rounded-full z-100 pointer-events-none"
+      className="fixed top-0 left-0 size-8 border-white/50 border-2 rounded-full z-101 pointer-events-none"
     />
   );
 };

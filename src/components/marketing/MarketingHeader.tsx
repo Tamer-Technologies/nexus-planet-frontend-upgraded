@@ -101,7 +101,7 @@ const MarketingHeader = () => {
 
   return (
     <header
-      className="fixed flex w-full items-center top-0 left-0 z-50 p-7 gap-5"
+      className="fixed flex w-full items-center top-0 left-0 z-100 p-7 gap-5"
       ref={containerRef}
     >
       <Logo className="-translate-y-[15%] mr-auto pointer-events-none" />
