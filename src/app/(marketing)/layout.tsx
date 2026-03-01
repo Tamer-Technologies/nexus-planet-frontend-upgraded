@@ -7,10 +7,10 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="cursor-none min-h-svh">
+    <div className="cursor-none">
       <CustomCursor />
       <MarketingHeader />
-      <main>{children}</main>
+      <main className="min-h-svh">{children}</main>
     </div>
   );
 };
