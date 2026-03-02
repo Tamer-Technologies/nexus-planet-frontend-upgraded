@@ -10,26 +10,24 @@ import Stars3D from "./Stars3D";
 import useHomeAnim from "@/hooks/marketing/home/useHomeAnim";
 import SpeedLines3d from "./SpeedLines3d";
 import { useState } from "react";
+import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
 
 const FONT_URL = "/fonts/barlow-condensed-3d/700.ttf";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Experience = () => {
-  const {
-    cameraRef,
-    environmentGroupRef,
-    starCardContRef,
-    starCardRef,
-    animationStateRef,
-  } = useHomeAnim();
+  const animRefs = useLandingPage();
+
+  useHomeAnim(animRefs);
+
   const [hovered, setHovered] = useState(false);
 
   useFrame((_, delta) => {
-    if (environmentGroupRef.current) {
-      const { rotationSpeed, direction } = animationStateRef.current;
+    if (animRefs.environmentGroupRef.current) {
+      const { rotationSpeed, direction } = animRefs.animationStateRef.current;
 
-      environmentGroupRef.current.rotation.y +=
+      animRefs.environmentGroupRef.current.rotation.y +=
         delta * rotationSpeed * direction;
     }
   });
@@ -38,36 +36,54 @@ export const Experience = () => {
     <>
       <PerspectiveCamera
         makeDefault
-        ref={cameraRef}
+        ref={animRefs.cameraRef}
         fov={50}
         position={[0, 1, 5]}
       />
 
-      <Html transform position={[-0.5, 1.5, 0]}>
+      <Html>
         <section>
           <h1>
             <span className="sr-only">WELCOME TO YOUR NEXUS PLANET</span>
           </h1>
+          {/* <p className="uppercase font-semibold font-barlow-condensed text-center text-6xl w-80">
+            The self-hosted social media platform built for ultimate control and
+            privacy.
+          </p> */}
         </section>
       </Html>
 
-      <group position={[-0.5, 1.5, 0]} scale={0.25}>
-        <Text color="white" position={[2, 0, 0]} font={FONT_URL}>
+      <group position={[0, 0.9, 0]} scale={0.25} ref={animRefs.landingTitleRef}>
+        <Text color="#999999" position={[0, 2.4, 0]} font={FONT_URL}>
           WELCOME TO YOUR
         </Text>
 
-        <Text color="#fbbf24" position={[2, -1.2, 0]} font={FONT_URL}>
+        <Text color="#fbbf24" position={[0, 1.2, 0]} font={FONT_URL}>
           NEXUS PLANET
         </Text>
       </group>
 
-      <group ref={environmentGroupRef}>
+      {/* <group rotation={[0, -0.8, 0]}>
+        <group position={[1.53, 0.5, 0]} scale={0.05}>
+          <Text color="#666666" position={[0, 0, 0]} font={FONT_URL}>
+            The self-hosted social media platform
+          </Text>
+          <Text color="#666666" position={[0, -1.2, 0]} font={FONT_URL}>
+            built for ultimate control and
+          </Text>
+          <Text color="#666666" position={[0, -2.4, 0]} font={FONT_URL}>
+            privacy
+          </Text>
+        </group>
+      </group> */}
+
+      <group ref={animRefs.environmentGroupRef}>
         <Planet3D scale={0.15} />
         <Stars3D noOfPoints={1000} intensity={1.5} maxRange={30} />
       </group>
 
-      <group ref={starCardContRef} rotation={[0, 1, 0]} scale={0.15}>
-        <group ref={starCardRef} position={[11, 1.3, 0]} scale={0}>
+      <group ref={animRefs.starCardContRef} rotation={[0, 1, 0]} scale={0.15}>
+        <group ref={animRefs.starCardRef} position={[11, 1.3, 0]} scale={0}>
           <Html transform position={[-0.7, 2.1, 0]}>
             <section>
               <h2>

@@ -1,0 +1,67 @@
+"use client";
+
+import { createContext, RefObject, useContext, useRef } from "react";
+import { Group, Object3DEventMap, PerspectiveCamera } from "three";
+import * as THREE from "three";
+
+export type LandingAnimProps = {
+  cameraRef: RefObject<PerspectiveCamera | null>;
+  environmentGroupRef: RefObject<Group<Object3DEventMap> | null>;
+  starCardContRef: RefObject<Group<Object3DEventMap> | null>;
+  starCardRef: RefObject<Group<Object3DEventMap> | null>;
+  animationStateRef: RefObject<{
+    rotationSpeed: number;
+    direction: -1 | 1;
+  }>;
+  landingTitleRef: RefObject<Group<Object3DEventMap> | null>;
+};
+
+const LandingPageContext = createContext<LandingAnimProps | undefined>(
+  undefined,
+);
+
+export const LandingPage = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+  const environmentGroupRef = useRef<THREE.Group>(null);
+  const starCardContRef = useRef<THREE.Group>(null);
+  const starCardRef = useRef<THREE.Group>(null);
+  const landingTitleRef = useRef<THREE.Group>(null);
+
+  const animationStateRef = useRef<{
+    rotationSpeed: number;
+    direction: -1 | 1;
+  }>({
+    rotationSpeed: 0.1,
+    direction: -1,
+  });
+
+  return (
+    <LandingPageContext.Provider
+      value={{
+        cameraRef,
+        environmentGroupRef,
+        starCardContRef,
+        starCardRef,
+        landingTitleRef,
+        animationStateRef,
+      }}
+    >
+      {children}
+    </LandingPageContext.Provider>
+  );
+};
+
+export default LandingPageContext;
+
+export const useLandingPage = () => {
+  const context = useContext(LandingPageContext);
+  if (context === undefined) {
+    throw new Error("No value specified to LandingPageContext");
+  }
+
+  return context;
+};

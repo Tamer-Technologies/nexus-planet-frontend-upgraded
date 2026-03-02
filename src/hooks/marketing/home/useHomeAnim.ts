@@ -1,24 +1,22 @@
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import { LandingAnimProps } from "@/contexts/marketing/LandingPageContext";
 
-const useHomeAnim = () => {
-  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
-  const environmentGroupRef = useRef<THREE.Group>(null);
-  const starCardContRef = useRef<THREE.Group>(null);
-  const starCardRef = useRef<THREE.Group>(null);
-
-  const animationStateRef = useRef<{
-    rotationSpeed: number;
-    direction: -1 | 1;
-  }>({
-    rotationSpeed: 0.1,
-    direction: -1,
-  });
-
+const useHomeAnim = ({
+  cameraRef,
+  starCardContRef,
+  starCardRef,
+  animationStateRef,
+  landingTitleRef,
+}: LandingAnimProps) => {
   useGSAP(() => {
-    if (!cameraRef.current || !starCardContRef.current || !starCardRef.current)
+    if (
+      !cameraRef.current ||
+      !starCardContRef.current ||
+      !starCardRef.current ||
+      !landingTitleRef.current
+    )
       return;
 
     cameraRef.current.lookAt(0, 0, 0);
@@ -90,6 +88,16 @@ const useHomeAnim = () => {
           ease: "power3.inOut",
         },
         "<20%",
+      )
+      .to(
+        landingTitleRef.current.scale,
+        {
+          x: 0,
+          y: 0,
+          z: 0,
+          duration: 0.5,
+        },
+        "<30%",
       );
 
     tl.addLabel("dive");
@@ -126,14 +134,6 @@ const useHomeAnim = () => {
 
     tl.addLabel("star-repo");
   });
-
-  return {
-    cameraRef,
-    environmentGroupRef,
-    starCardContRef,
-    starCardRef,
-    animationStateRef,
-  };
 };
 
 export default useHomeAnim;

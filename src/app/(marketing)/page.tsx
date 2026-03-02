@@ -1,10 +1,11 @@
 import HomeScene3D from "@/components/marketing/home/HomeScene3D";
+import { LandingPage } from "@/contexts/marketing/LandingPageContext";
 
 const page = () => {
   return (
-    <div className="h-svh relative">
+    <LandingPage>
       <HomeScene3D />
-    </div>
+    </LandingPage>
   );
 };
 
