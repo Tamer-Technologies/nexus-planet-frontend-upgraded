@@ -2,20 +2,26 @@ import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { LandingAnimProps } from "@/contexts/marketing/LandingPageContext";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText);
 
 const useHomeAnim = ({
   cameraRef,
   starCardContRef,
   starCardRef,
   animationStateRef,
-  landingTitleRef,
+  titleRef,
+  subTitleRef,
 }: LandingAnimProps) => {
   useGSAP(() => {
     if (
       !cameraRef.current ||
       !starCardContRef.current ||
       !starCardRef.current ||
-      !landingTitleRef.current
+      !titleRef.current
     )
       return;
 
@@ -56,7 +62,7 @@ const useHomeAnim = ({
         end: "bottom bottom",
         scrub: 1,
         snap: {
-          snapTo: "labels",
+          snapTo: "labelsDirectional",
           delay: 0,
         },
       },
@@ -90,7 +96,7 @@ const useHomeAnim = ({
         "<20%",
       )
       .to(
-        landingTitleRef.current.scale,
+        titleRef.current.scale,
         {
           x: 0,
           y: 0,
@@ -100,13 +106,39 @@ const useHomeAnim = ({
         "<30%",
       );
 
-    tl.addLabel("dive");
+    const split = SplitText.create(subTitleRef.current, {
+      type: "lines",
+      mask: "lines",
+    });
+
+    tl.fromTo(
+      split.lines,
+      { yPercent: 100, autoAlpha: 0 },
+      {
+        yPercent: 0,
+        autoAlpha: 1,
+        ease: "power3.inOut",
+        stagger: 0.1,
+      },
+    );
+
+    tl.addLabel("sub title");
 
     // rotate to the star repo card
-    tl.to(animationStateRef.current, {
-      rotationSpeed: 1.5,
-      duration: 0.5,
+    tl.to(split.lines, {
+      yPercent: 100,
+      autoAlpha: 0,
+      ease: "power3.inOut",
+      delay: 0.2,
+      stagger: {
+        each: 0.1,
+        from: "end",
+      },
     })
+      .to(animationStateRef.current, {
+        rotationSpeed: 1.5,
+        duration: 0.5,
+      })
       .to(starCardRef.current.scale, {
         x: 1,
         y: 1,

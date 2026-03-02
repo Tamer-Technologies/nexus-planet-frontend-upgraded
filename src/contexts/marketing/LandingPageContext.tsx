@@ -13,7 +13,8 @@ export type LandingAnimProps = {
     rotationSpeed: number;
     direction: -1 | 1;
   }>;
-  landingTitleRef: RefObject<Group<Object3DEventMap> | null>;
+  titleRef: RefObject<Group<Object3DEventMap> | null>;
+  subTitleRef: RefObject<HTMLParagraphElement | null>;
 };
 
 const LandingPageContext = createContext<LandingAnimProps | undefined>(
@@ -29,7 +30,8 @@ export const LandingPage = ({
   const environmentGroupRef = useRef<THREE.Group>(null);
   const starCardContRef = useRef<THREE.Group>(null);
   const starCardRef = useRef<THREE.Group>(null);
-  const landingTitleRef = useRef<THREE.Group>(null);
+  const titleRef = useRef<THREE.Group>(null);
+  const subTitleRef = useRef<HTMLParagraphElement>(null);
 
   const animationStateRef = useRef<{
     rotationSpeed: number;
@@ -46,8 +48,9 @@ export const LandingPage = ({
         environmentGroupRef,
         starCardContRef,
         starCardRef,
-        landingTitleRef,
+        titleRef,
         animationStateRef,
+        subTitleRef,
       }}
     >
       {children}
