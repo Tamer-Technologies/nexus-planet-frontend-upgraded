@@ -17,154 +17,168 @@ const useHomeAnim = ({
   subTitleRef,
 }: LandingAnimProps) => {
   useGSAP(() => {
-    if (
-      !cameraRef.current ||
-      !starCardContRef.current ||
-      !starCardRef.current ||
-      !titleRef.current
-    )
-      return;
+    const mm = gsap.matchMedia();
 
-    cameraRef.current.lookAt(0, 0, 0);
+    mm.add(
+      { isDesktop: "(min-width: 1024px)", isMobile: "(max-width: 1023px)" },
+      (context) => {
+        if (
+          !cameraRef.current ||
+          !starCardContRef.current ||
+          !starCardRef.current ||
+          !titleRef.current
+        )
+          return;
 
-    // initial animations
+        cameraRef.current.lookAt(0, 0, 0);
 
-    gsap.fromTo(
-      starCardRef.current.rotation,
-      {
-        x: THREE.MathUtils.degToRad(5),
-        y: THREE.MathUtils.degToRad(-5),
-      },
-      {
-        x: THREE.MathUtils.degToRad(-5),
-        y: THREE.MathUtils.degToRad(10),
+        const { isDesktop } = context.conditions as { isDesktop: boolean };
 
-        duration: 4,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1,
-      },
-    );
+        // initial animations
 
-    gsap.to(starCardRef.current.position, {
-      y: 1.6,
-      duration: 4,
-      ease: "power1.inOut",
-      yoyo: true,
-      repeat: -1,
-    });
+        gsap.fromTo(
+          starCardRef.current.rotation,
+          {
+            x: THREE.MathUtils.degToRad(5),
+            y: THREE.MathUtils.degToRad(-5),
+          },
+          {
+            x: THREE.MathUtils.degToRad(-5),
+            y: THREE.MathUtils.degToRad(10),
 
-    // Scroll Animation
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".scroll-container",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        snap: {
-          snapTo: "labelsDirectional",
-          delay: 0,
-        },
-      },
-    });
+            duration: 4,
+            ease: "power1.inOut",
+            yoyo: true,
+            repeat: -1,
+          },
+        );
 
-    // zoom in
-    tl.from(cameraRef.current.position, {
-      z: 25,
-      y: 5,
-      ease: "power3.inOut",
-    });
+        gsap.to(starCardRef.current.position, {
+          y: 1.6,
+          duration: 4,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
 
-    tl.addLabel("start");
+        // Scroll Animation
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".scroll-container",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            snap: {
+              snapTo: "labelsDirectional",
+              delay: 0,
+            },
+          },
+        });
 
-    // dive close to the planet
-    tl.to(cameraRef.current.position, {
-      z: 2.15,
-      y: 0.5,
-      duration: 1,
-      ease: "power3.inOut",
-    })
-
-      .to(
-        cameraRef.current.rotation,
-        {
-          x: 0,
-          y: THREE.MathUtils.degToRad(-45),
-          duration: 0.8,
+        // zoom in
+        tl.to(cameraRef.current.position, {
+          z: 5,
+          y: isDesktop ? 1.1 : 1.5,
           ease: "power3.inOut",
-        },
-        "<20%",
-      )
-      .to(
-        titleRef.current.scale,
-        {
-          x: 0,
-          y: 0,
-          z: 0,
-          duration: 0.5,
-        },
-        "<30%",
-      );
+        });
 
-    const split = SplitText.create(subTitleRef.current, {
-      type: "lines",
-      mask: "lines",
-    });
+        tl.addLabel("start");
 
-    tl.fromTo(
-      split.lines,
-      { yPercent: 100, autoAlpha: 0 },
-      {
-        yPercent: 0,
-        autoAlpha: 1,
-        ease: "power3.inOut",
-        stagger: 0.1,
+        // dive close to the planet
+        tl.to(cameraRef.current.position, {
+          z: 2.19,
+          y: 0.5,
+          duration: 1,
+          ease: "power3.inOut",
+        })
+
+          .to(
+            cameraRef.current.rotation,
+            {
+              x: 0,
+              y: THREE.MathUtils.degToRad(-45),
+              duration: 0.8,
+              ease: "power3.inOut",
+            },
+            "<20%",
+          )
+          .to(
+            titleRef.current.scale,
+            {
+              x: 0,
+              y: 0,
+              z: 0,
+              duration: 0.4,
+            },
+            "<50%",
+          );
+
+        const split = SplitText.create(subTitleRef.current, {
+          type: "lines",
+          mask: "lines",
+        });
+
+        tl.fromTo(
+          split.lines,
+          { yPercent: 100, autoAlpha: 0 },
+          {
+            yPercent: 0,
+            autoAlpha: 1,
+            ease: "power3.inOut",
+            stagger: 0.1,
+          },
+        );
+
+        tl.addLabel("sub title");
+
+        // rotate to the star repo card
+        tl.to(split.lines, {
+          yPercent: 100,
+          autoAlpha: 0,
+          ease: "power3.inOut",
+          delay: 0.2,
+          stagger: {
+            each: 0.1,
+            from: "end",
+          },
+        })
+          .to(animationStateRef.current, {
+            rotationSpeed: 1.5,
+            duration: 0.5,
+          })
+          .to(starCardRef.current.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0,
+          })
+
+          .to(starCardRef.current.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 1,
+          })
+          .to(
+            starCardContRef.current.rotation,
+            {
+              y: isDesktop
+                ? THREE.MathUtils.degToRad(-55)
+                : THREE.MathUtils.degToRad(-45),
+              duration: 0.8,
+            },
+            "<",
+          )
+
+          .to(
+            animationStateRef.current,
+            { rotationSpeed: 0.1, duration: 1 },
+            "<50%",
+          );
+
+        tl.addLabel("star-repo");
       },
     );
-
-    tl.addLabel("sub title");
-
-    // rotate to the star repo card
-    tl.to(split.lines, {
-      yPercent: 100,
-      autoAlpha: 0,
-      ease: "power3.inOut",
-      delay: 0.2,
-      stagger: {
-        each: 0.1,
-        from: "end",
-      },
-    })
-      .to(animationStateRef.current, {
-        rotationSpeed: 1.5,
-        duration: 0.5,
-      })
-      .to(starCardRef.current.scale, {
-        x: 1,
-        y: 1,
-        z: 1,
-        duration: 0,
-      })
-
-      .to(starCardRef.current.scale, {
-        x: 1,
-        y: 1,
-        z: 1,
-        duration: 1,
-      })
-      .to(
-        starCardContRef.current.rotation,
-        { y: THREE.MathUtils.degToRad(-55), duration: 2 },
-        "<",
-      )
-
-      .to(
-        animationStateRef.current,
-        { rotationSpeed: 0.1, duration: 1 },
-        "<50%",
-      );
-
-    tl.addLabel("star-repo");
   });
 };
 

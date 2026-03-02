@@ -34,7 +34,7 @@ export const Experience = () => {
         makeDefault
         ref={animRefs.cameraRef}
         fov={50}
-        position={[0, 1, 5]}
+        position={[0, 5, 25]}
       />
 
       <group position={[0, 0.9, 0]} scale={0.25} ref={animRefs.titleRef}>
