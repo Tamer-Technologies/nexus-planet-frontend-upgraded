@@ -31,12 +31,7 @@ export const Experience = () => {
 
   return (
     <>
-      <PerspectiveCamera
-        makeDefault
-        ref={animRefs.cameraRef}
-        fov={50}
-        position={[0, 5, 25]}
-      />
+      <PerspectiveCamera makeDefault ref={animRefs.cameraRef} fov={50} />
 
       <group position={[0, 0.9, 0]} scale={0.25} ref={animRefs.titleRef}>
         <Text color="#999999" position={[0, 2.4, 0]} font={FONT_URL}>

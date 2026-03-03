@@ -52,13 +52,17 @@ const useHomeAnim = ({
 
           if (reducedMotion) {
             animationStateRef.current.rotationSpeed = 0.02;
-            if (isDesktop) {
-              cameraRef.current.position.set(0, 1.1, 5);
-            } else cameraRef.current.position.set(0, 1.5, 5);
           } else {
             animationStateRef.current.rotationSpeed = 0.1;
           }
 
+          gsap.set(cameraRef.current.position, {
+            x: 0,
+            y: 0.9,
+            z: 5,
+          });
+
+          cameraRef.current.lookAt(0, isDesktop ? 0.2 : 0.5, 0);
           // initial animations
 
           gsap.fromTo(
@@ -98,18 +102,17 @@ const useHomeAnim = ({
                 : {
                     snapTo: "labelsDirectional",
                     delay: 0,
+                    duration: 5,
                   },
             },
           });
 
           // zoom in
-          if (!reducedMotion) {
-            tl.to(cameraRef.current.position, {
-              z: 5,
-              y: isDesktop ? 1.1 : 1.5,
-              ease: "power3.inOut",
-            });
-          }
+          tl.from(cameraRef.current.position, {
+            z: reducedMotion ? 5 : 25,
+            y: reducedMotion ? 0.9 : 3,
+            ease: "power3.inOut",
+          });
 
           tl.addLabel("start");
 
@@ -167,12 +170,10 @@ const useHomeAnim = ({
             },
           });
 
-          if (!reducedMotion) {
-            tl.to(animationStateRef.current, {
-              rotationSpeed: 1.5,
-              duration: 0.5,
-            });
-          }
+          tl.to(animationStateRef.current, {
+            rotationSpeed: reducedMotion ? 0.02 : 1.5,
+            duration: 0.5,
+          });
 
           tl.to(starCardRef.current.scale, {
             x: 1,
@@ -198,13 +199,11 @@ const useHomeAnim = ({
               "<",
             );
 
-          if (!reducedMotion) {
-            tl.to(
-              animationStateRef.current,
-              { rotationSpeed: 0.1, duration: 1 },
-              "<50%",
-            );
-          }
+          tl.to(
+            animationStateRef.current,
+            { rotationSpeed: reducedMotion ? 0.02 : 0.1, duration: 1 },
+            "<50%",
+          );
 
           tl.addLabel("star-repo");
         },
