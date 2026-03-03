@@ -13,9 +13,10 @@ import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
 const FONT_URL = "/fonts/barlow-condensed-3d/700.ttf";
 
 export const Experience = () => {
-  const animRefs = useLandingPage();
+  const { animRefs, getIsMotionReduced, setIsMotionReduced } = useLandingPage();
+  const isMotionReduced = getIsMotionReduced();
 
-  useHomeAnim(animRefs);
+  useHomeAnim({ animRefs, getIsMotionReduced, setIsMotionReduced });
 
   const [hovered, setHovered] = useState(false);
 
@@ -75,6 +76,7 @@ export const Experience = () => {
         <SpeedLines3d
           hovered={hovered}
           scale={1.5}
+          speed={isMotionReduced ? 0.05 : 0.5}
           position={[10.4, 3.6, -0.5]}
         />
       </group>

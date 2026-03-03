@@ -1,33 +1,34 @@
 import { useFrame } from "@react-three/fiber";
-import { ComponentProps, useMemo, useRef } from "react";
+import { ComponentProps, useRef } from "react";
 import * as THREE from "three";
 
 interface SpeedLines3dProps extends ComponentProps<"mesh"> {
   hovered: boolean;
   cylinderArgs?: [number, number, number, number, number, boolean];
+  speed?: number;
 }
 
 const SpeedLines3d = ({
   hovered,
   cylinderArgs = [1.5, 1.5, 3, 32, 1, true],
+  speed = 0.5,
   ...props
 }: SpeedLines3dProps) => {
   const shaderRef = useRef<THREE.ShaderMaterial>(null);
-  const speedLinesShader = useMemo(
-    () => ({
-      uniforms: {
-        uTime: { value: 0 },
-        uColor: { value: new THREE.Color("#FFCF68") },
-        uOpacity: { value: 0 },
-      },
-      vertexShader: `
+  const speedLinesShader = {
+    uniforms: {
+      uTime: { value: 0 },
+      uColor: { value: new THREE.Color("#FFCF68") },
+      uOpacity: { value: 0 },
+    },
+    vertexShader: `
         varying vec2 vUv;
         void main() {
           vUv = uv;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
-      fragmentShader: `
+    fragmentShader: `
         varying vec2 vUv;
         uniform float uTime;
         uniform float uOpacity;
@@ -40,7 +41,7 @@ const SpeedLines3d = ({
           float lineId = floor(vUv.x * 45.0); 
           float h = hash(lineId);
           
-          float speed = uTime * (0.5 + h * 0.5);
+          float speed = uTime * (${speed} + h * ${speed});
           
           float offset = h * 100.0;
           
@@ -61,9 +62,7 @@ const SpeedLines3d = ({
           gl_FragColor = vec4(baseColor * 5.0, finalAlpha);
         }
       `,
-    }),
-    [],
-  );
+  };
 
   useFrame((state) => {
     if (shaderRef.current) {

@@ -8,12 +8,15 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Progress } from "@/components/ui/progress";
 import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
+import { Button } from "@/components/ui/button";
 
 const HomeScene3D = () => {
   const { progress } = useProgress();
   const loadingLayerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { subTitleRef } = useLandingPage();
+  const { animRefs, setIsMotionReduced, getIsMotionReduced } = useLandingPage();
+
+  const isMotionReduced = getIsMotionReduced();
 
   useGSAP(
     () => {
@@ -64,13 +67,20 @@ const HomeScene3D = () => {
             <span className="sr-only">WELCOME TO YOUR NEXUS PLANET</span>
           </h1>
           <p
-            ref={subTitleRef}
+            ref={animRefs.subTitleRef}
             className="uppercase font-bold font-barlow-condensed text-center text-2xl max-w-90 sm:text-3xl sm:max-w-113 lg:text-4xl lg:max-w-130 xl:text-6xl xl:max-w-220"
           >
             The self-hosted social media platform built for ultimate control and
             <span className="text-primary">&nbsp;privacy.</span>
           </p>
         </section>
+        <Button
+          className="absolute bottom-5 right-5 font-semibold font-barlow-condensed text-lg cursor-none"
+          variant={"default"}
+          onClick={() => setIsMotionReduced(!isMotionReduced)}
+        >
+          {isMotionReduced ? "Enable Motion" : "Reduce Motion"}
+        </Button>
       </div>
     </div>
   );
