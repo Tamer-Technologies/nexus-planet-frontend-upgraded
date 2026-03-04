@@ -1,9 +1,9 @@
-import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { LandingAnimProps } from "@/contexts/marketing/LandingPageContext";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { degToRad } from "@/utils/threeUtils";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
@@ -56,6 +56,10 @@ const useHomeAnim = ({
             animationStateRef.current.rotationSpeed = 0.1;
           }
 
+          gsap.set(".blackhole-happy-face", { autoAlpha: 0 });
+          gsap.set(".blackhole-cute-face", { autoAlpha: 0 });
+          gsap.set(".blackhole-explain-face", { autoAlpha: 0 });
+
           gsap.set(cameraRef.current.position, {
             x: 0,
             y: 0.9,
@@ -68,12 +72,12 @@ const useHomeAnim = ({
           gsap.fromTo(
             starCardRef.current.rotation,
             {
-              x: THREE.MathUtils.degToRad(5),
-              y: THREE.MathUtils.degToRad(-5),
+              x: degToRad(5),
+              y: degToRad(-5),
             },
             {
-              x: THREE.MathUtils.degToRad(-5),
-              y: THREE.MathUtils.degToRad(10),
+              x: degToRad(-5),
+              y: degToRad(10),
 
               duration: 4,
               ease: "power1.inOut",
@@ -128,7 +132,7 @@ const useHomeAnim = ({
               cameraRef.current.rotation,
               {
                 x: 0,
-                y: THREE.MathUtils.degToRad(-45),
+                y: degToRad(-45),
                 duration: 0.8,
                 ease: "power3.inOut",
               },
@@ -191,9 +195,7 @@ const useHomeAnim = ({
             .to(
               starCardContRef.current.rotation,
               {
-                y: isDesktop
-                  ? THREE.MathUtils.degToRad(-55)
-                  : THREE.MathUtils.degToRad(-45),
+                y: isDesktop ? degToRad(-55) : degToRad(-45),
                 duration: 0.8,
               },
               "<",
@@ -206,6 +208,62 @@ const useHomeAnim = ({
           );
 
           tl.addLabel("star-repo");
+
+          tl.to(starCardContRef.current.position, {
+            x: 3,
+            z: 3,
+            duration: 1.5,
+            ease: "power3.in",
+          })
+            .to(starCardRef.current.scale, {
+              x: 0,
+              y: 0,
+              z: 0,
+            })
+            .to(cameraRef.current.position, {
+              x: 21.9,
+              z: -21,
+              duration: 2,
+              ease: "power3.inOut",
+            });
+
+          tl.addLabel("to the black hole");
+
+          tl.to(animationStateRef.current, { rotationSpeed: 0.002 }, "<30%")
+            .set(".blackhole-happy-face", { autoAlpha: 1, delay: 0.8 })
+            .fromTo(
+              ".blackhole-msg",
+              {
+                xPercent: isDesktop ? 100 : 0,
+                yPercent: isDesktop ? -170 : -200,
+                scale: 0,
+              },
+              { duration: 1, scale: 1 },
+            );
+
+          tl.set(".blackhole-happy-face", { autoAlpha: 0, delay: 0.8 })
+            .set(".blackhole-msg-1-2", { opacity: 1 })
+            .set(".blackhole-cute-face", { autoAlpha: 1 });
+
+          tl.addLabel("blackhole msg 1");
+
+          tl.to(".blackhole-msg", { scale: 0, duration: 1, delay: 0.8 })
+            .set(".blackhole-msg-1", { opacity: 0 })
+            .set(".blackhole-msg-2", { opacity: 1 })
+            .set(".blackhole-cute-face", { autoAlpha: 0 })
+            .set(".blackhole-explain-face", { autoAlpha: 1 })
+            .to(".blackhole-msg", { scale: 1, duration: 1 });
+
+          tl.addLabel("blackhole msg 2");
+
+          tl.to(".blackhole-msg", { scale: 0, duration: 1, delay: 0.8 })
+            .set(".blackhole-explain-face", { autoAlpha: 0 })
+            .to(cameraRef.current.position, {
+              x: 25.9,
+              z: -25,
+              duration: 2,
+              ease: "power3.inOut",
+            });
         },
       );
 

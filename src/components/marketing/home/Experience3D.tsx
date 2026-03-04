@@ -9,6 +9,8 @@ import useHomeAnim from "@/hooks/marketing/home/useHomeAnim";
 import SpeedLines3d from "./SpeedLines3d";
 import { useState } from "react";
 import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
+import Blackhole3d from "./Blackhole3d";
+import { degToRad } from "@/utils/threeUtils";
 
 const FONT_URL = "/fonts/barlow-condensed-3d/700.ttf";
 
@@ -45,7 +47,7 @@ export const Experience = () => {
 
       <group ref={animRefs.environmentGroupRef}>
         <Planet3D scale={0.15} />
-        <Stars3D noOfPoints={1000} intensity={1.5} maxRange={30} />
+        <Stars3D noOfPoints={10000} intensity={1.5} maxRange={90} />
       </group>
 
       <group ref={animRefs.starCardContRef} rotation={[0, 1, 0]} scale={0.15}>
@@ -73,6 +75,13 @@ export const Experience = () => {
           scale={1.5}
           speed={isMotionReduced ? 0.05 : 0.5}
           position={[10.4, 3.6, -0.5]}
+        />
+      </group>
+
+      <group position={[25.9, 0.5, -25]}>
+        <Blackhole3d
+          rotation={[degToRad(-20), degToRad(-210), degToRad(-100)]}
+          speed={1}
         />
       </group>
     </>

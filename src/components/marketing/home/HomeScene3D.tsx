@@ -33,7 +33,7 @@ const HomeScene3D = () => {
 
   return (
     <div
-      className="scroll-container relative w-full isolate h-[1400svh] bg-black"
+      className="scroll-container relative w-full isolate h-[2000svh] bg-black"
       ref={containerRef}
     >
       <div
@@ -62,7 +62,7 @@ const HomeScene3D = () => {
             <Experience />
           </Suspense>
         </Canvas>
-        <section className="absolute inset-0 flex justify-center items-center p-10">
+        <section className="absolute inset-0 flex justify-center items-center p-10 pointer-events-none">
           <h1>
             <span className="sr-only">WELCOME TO YOUR NEXUS PLANET</span>
           </h1>
@@ -74,6 +74,52 @@ const HomeScene3D = () => {
             <span className="text-primary">&nbsp;privacy.</span>
           </p>
         </section>
+
+        {/* blackhole chat */}
+        <div aria-hidden={true} className="pointer-events-none">
+          <div>
+            <div className="absolute inset-0 left-1/2 top-1/2 font-black text-4xl lg:text-6xl text-white/70 font-barlow-condensed">
+              <span className="-translate-1/2 inline-block blackhole-happy-face opacity-0">
+                〃＾▽＾〃
+              </span>
+            </div>
+            <div className="absolute inset-0 left-1/2 top-1/2 font-black text-4xl lg:text-6xl text-white/70 font-barlow-condensed">
+              <span className="-translate-1/2 inline-block blackhole-cute-face opacity-0">
+                ● ´ω｀●
+              </span>
+            </div>
+            <div className="absolute inset-0 left-1/2 top-1/2 font-black text-4xl lg:text-6xl text-white/70 font-barlow-condensed">
+              <span className="-translate-1/2 inline-block blackhole-explain-face opacity-0">
+                ▰˘◡˘▰
+              </span>
+            </div>
+          </div>
+
+          <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+            <div className="relative w-72 blackhole-msg">
+              <div className="absolute inset-0 -m-4 rounded-2xl bg-background/90 backdrop-blur-sm -z-10" />
+
+              <p className="blackhole-msg-1 text-xl text-white/70 font-barlow-condensed">
+                <span className="block font-bold text-primary">
+                  OH FINALLY! A FRIEND
+                </span>
+                <span className="block blackhole-msg-1-2 opacity-0">
+                  Ammm .. I mean .. you should be here to see what{" "}
+                  <span className="font-bold text-primary">features </span> your
+                  planet provides.
+                </span>
+              </p>
+
+              <p className="blackhole-msg-2 absolute top-0 left-0 opacity-0 text-xl text-white/70 font-barlow-condensed">
+                <span className="font-bold text-primary">Unfortunately </span>I
+                will have to
+                <span className="font-bold text-primary"> suck</span> you. Don’t
+                worry tho, You won’t turn into spaghetti 🍝
+              </p>
+            </div>
+          </div>
+        </div>
+
         <Button
           className="absolute bottom-5 right-5 font-semibold font-barlow-condensed text-lg cursor-none"
           variant={"default"}
