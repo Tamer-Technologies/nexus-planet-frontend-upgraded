@@ -105,7 +105,7 @@ const useHomeAnim = ({
                 ? undefined
                 : {
                     snapTo: "labelsDirectional",
-                    delay: 0,
+                    delay: 3,
                     duration: 5,
                   },
             },
@@ -259,11 +259,13 @@ const useHomeAnim = ({
           tl.to(".blackhole-msg", { scale: 0, duration: 1, delay: 0.8 })
             .set(".blackhole-explain-face", { autoAlpha: 0 })
             .to(cameraRef.current.position, {
-              x: 25.9,
-              z: -25,
+              x: 25.1,
+              z: -24.2,
               duration: 2,
               ease: "power3.inOut",
             });
+
+          tl.addLabel("dive to the black hole");
         },
       );
 

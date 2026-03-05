@@ -60,7 +60,7 @@ const Features = () => {
         },
       );
 
-      featuresList.forEach((item, index) => {
+      featuresList.forEach((_, index) => {
         const titleSplit = SplitText.create(`.feature-title-${index + 1}`, {
           type: "lines",
           mask: "lines",
@@ -72,7 +72,7 @@ const Features = () => {
 
         splits.push(titleSplit, descSplit);
 
-        tl.from(titleSplit.lines, { yPercent: 100 });
+        tl.from(titleSplit.lines, { yPercent: -100 });
 
         tl.from(descSplit.lines, { yPercent: 100 });
 
@@ -91,7 +91,11 @@ const Features = () => {
   );
 
   return (
-    <section className="bg-black relative min-h-svh pt-24" ref={containerRef}>
+    <section
+      className="bg-background relative min-h-svh pt-24"
+      ref={containerRef}
+      id="app-features"
+    >
       <div className="flex flex-col items-center py-32 px-10 gap-28.75">
         <div className="relative">
           <h2 className="text-6xl text-primary font-bold uppercase font-barlow-condensed section-title">
