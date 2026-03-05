@@ -1,6 +1,6 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Experience } from "./Experience3D";
@@ -9,12 +9,16 @@ import gsap from "gsap";
 import { Progress } from "@/components/ui/progress";
 import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
 import { Button } from "@/components/ui/button";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HomeScene3D = () => {
   const { progress } = useProgress();
   const loadingLayerRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const { animRefs, setIsMotionReduced, getIsMotionReduced } = useLandingPage();
+  const [isRendering, setIsRendering] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const isMotionReduced = getIsMotionReduced();
 
@@ -25,6 +29,22 @@ const HomeScene3D = () => {
           autoAlpha: 0,
           duration: 0.8,
           ease: "power2.inOut",
+        });
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom 90%",
+          onToggle: (self) => {
+            setIsRendering(self.isActive);
+          },
+          onLeave: () => {
+            gsap.set(".fixed-canvas-container", { autoAlpha: 0 });
+            gsap.set(".reduce-motion-btn", { autoAlpha: 0 });
+          },
+          onEnterBack: () => {
+            gsap.set(".fixed-canvas-container", { autoAlpha: 1 });
+            gsap.set(".reduce-motion-btn", { autoAlpha: 1 });
+          },
         });
       }
     },
@@ -47,7 +67,10 @@ const HomeScene3D = () => {
       </div>
 
       <div className="fixed inset-0">
-        <Canvas>
+        <Canvas
+          frameloop={isRendering ? "always" : "never"}
+          className="fixed-canvas-container"
+        >
           <fog attach="fog" args={["#000000", 1, 25]} />
           <EffectComposer>
             <Bloom
@@ -121,7 +144,7 @@ const HomeScene3D = () => {
         </div>
 
         <Button
-          className="absolute bottom-5 right-5 font-semibold font-barlow-condensed text-lg cursor-none"
+          className="absolute reduce-motion-btn bottom-5 right-5 font-semibold font-barlow-condensed text-lg cursor-none"
           variant={"default"}
           onClick={() => setIsMotionReduced(!isMotionReduced)}
         >
