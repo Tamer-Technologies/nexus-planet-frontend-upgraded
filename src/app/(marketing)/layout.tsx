@@ -1,4 +1,5 @@
 import CustomCursor from "@/components/marketing/CustomCursor";
+import MarketingFooter from "@/components/marketing/home/MarketingFooter";
 import MarketingHeader from "@/components/marketing/MarketingHeader";
 
 const Layout = ({
@@ -11,6 +12,7 @@ const Layout = ({
       <CustomCursor />
       <MarketingHeader />
       <main className="min-h-svh">{children}</main>
+      <MarketingFooter />
     </div>
   );
 };

@@ -66,7 +66,7 @@ const HomeScene3D = () => {
         <Progress value={progress} className="w-[60%] max-w-200" />
       </div>
 
-      <div className="fixed inset-0">
+      <div className="sticky top-0 w-full h-screen overflow-hidden">
         <Canvas
           frameloop={isRendering ? "always" : "never"}
           className="fixed-canvas-container"
