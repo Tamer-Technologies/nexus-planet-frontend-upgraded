@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   },
   description:
     "The self-hosted social media platform built for ultimate control and privacy.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

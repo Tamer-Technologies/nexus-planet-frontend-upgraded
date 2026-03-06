@@ -1,6 +1,10 @@
 "use client";
 
+import InfiniteGrid3d from "@/components/marketing/home/InfiniteGrid3d";
 import { useGSAP } from "@gsap/react";
+import { PerspectiveCamera } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import { createContext, RefObject, useContext, useEffect, useRef } from "react";
@@ -35,7 +39,7 @@ export const PageTransition = ({
   return (
     <PageTransitionContext.Provider value={tlRef}>
       <div
-        className="fixed bg-amber-950 inset-0 z-50 cursor-none opacity-0"
+        className="fixed bg-black inset-0 z-50 cursor-none opacity-0"
         ref={transLayerRef}
       />
       {children}

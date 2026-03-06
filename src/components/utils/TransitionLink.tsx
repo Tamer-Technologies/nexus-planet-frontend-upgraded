@@ -17,10 +17,21 @@ const TransitionLink = ({
   const handleNavigation = async (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
+    const hrefString = href.toString();
+
+    const isAnchor = hrefString.startsWith("#");
+
+    const [path] = hrefString.split("#");
+    const isSamePageHash = path === pathname;
+
+    if (isAnchor || isSamePageHash) {
+      return;
+    }
+
     e.preventDefault();
-    if (href === pathname.toString()) return;
+
     if (tl?.current) await tl.current.play();
-    router.push(`${href}`);
+    router.push(hrefString);
   };
 
   return (

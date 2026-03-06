@@ -32,7 +32,7 @@ const HomeScene3D = () => {
         });
         ScrollTrigger.create({
           trigger: containerRef.current,
-          start: "top top",
+          start: "top 0.1%",
           end: "bottom 99.9%",
           onToggle: (self) => {
             setIsRendering(self.isActive);
@@ -60,10 +60,15 @@ const HomeScene3D = () => {
         ref={loadingLayerRef}
         className="fixed inset-0 bg-black z-50 flex flex-col justify-center items-center"
       >
-        <span className="font-bold text-8xl text-primary">
-          {progress.toFixed(0)}%
-        </span>
-        <Progress value={progress} className="w-[60%] max-w-200" />
+        <div className="flex flex-col items-center max-w-130 w-full">
+          <div className="font-bold text-primary font-barlow-condensed flex w-full items-center">
+            <span>Getting everything ready for you</span>
+            <span className="block text-3xl ml-auto">
+              {progress.toFixed(0)}%
+            </span>
+          </div>
+          <Progress value={progress} />
+        </div>
       </div>
 
       <div className="sticky top-0 w-full h-screen overflow-hidden">
