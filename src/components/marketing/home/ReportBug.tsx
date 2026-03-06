@@ -23,7 +23,7 @@ const ReportBug = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
+          start: "top 30%",
         },
       });
 

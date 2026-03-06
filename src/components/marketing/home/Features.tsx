@@ -37,7 +37,7 @@ const Features = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 50%",
+          start: "top 30%",
         },
         defaults: {
           ease: "power2.inOut",
@@ -52,13 +52,10 @@ const Features = () => {
       });
       splits.push(mainTitleSplit);
 
-      tl.from(mainTitleSplit.lines, { yPercent: 100, duration: 1 }).from(
-        ".section-svg",
-        {
-          drawSVG: "100% 100%",
-          duration: 1,
-        },
-      );
+      tl.from(mainTitleSplit.lines, { yPercent: 100 }).from(".section-svg", {
+        drawSVG: "100% 100%",
+        duration: 1,
+      });
 
       featuresList.forEach((_, index) => {
         const titleSplit = SplitText.create(`.feature-title-${index + 1}`, {

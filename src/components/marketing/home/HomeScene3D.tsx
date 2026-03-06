@@ -33,7 +33,7 @@ const HomeScene3D = () => {
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top top",
-          end: "bottom 90%",
+          end: "bottom 99.9%",
           onToggle: (self) => {
             setIsRendering(self.isActive);
           },
