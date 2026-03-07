@@ -8,6 +8,10 @@ import z from "zod";
 import { FieldGroup } from "../ui/field";
 import FormInput from "./FormInput";
 import { Button } from "../ui/button";
+import { AUTH_CONTENT } from "@/constants/auth/forms";
+
+const loginData = AUTH_CONTENT.login;
+const fieldsData = AUTH_CONTENT.fields;
 
 type FormValues = z.infer<typeof loginFormSchema>;
 
@@ -25,16 +29,20 @@ const LoginForm = ({ ...props }: ComponentProps<"form">) => {
   return (
     <form onSubmit={form.handleSubmit(handleOnSubmit)} {...props}>
       <FieldGroup>
-        <FormInput control={form.control} label="Username" name="username" />
         <FormInput
           control={form.control}
-          label="Password"
+          label={fieldsData.username.label}
+          name="username"
+        />
+        <FormInput
+          control={form.control}
+          label={fieldsData.password.label}
           name="password"
           type="password"
         />
 
         <Button className="uppercase font-semibold font-barlow-condensed text-base">
-          Login
+          {loginData.submitButton}
         </Button>
       </FieldGroup>
     </form>

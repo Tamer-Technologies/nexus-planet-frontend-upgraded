@@ -8,6 +8,10 @@ import z from "zod";
 import { FieldGroup } from "../ui/field";
 import FormInput from "./FormInput";
 import { Button } from "../ui/button";
+import { AUTH_CONTENT } from "@/constants/auth/forms";
+
+const registerData = AUTH_CONTENT.register;
+const fieldsData = AUTH_CONTENT.fields;
 
 type FormValues = z.infer<typeof registerFormSchema>;
 
@@ -25,22 +29,26 @@ const RegisterForm = ({ ...props }: ComponentProps<"form">) => {
   return (
     <form onSubmit={form.handleSubmit(handleOnSubmit)} {...props}>
       <FieldGroup>
-        <FormInput control={form.control} label="Username*" name="username" />
         <FormInput
           control={form.control}
-          label="Email (optional)"
+          label={fieldsData.usernameRequired.label}
+          name="username"
+        />
+        <FormInput
+          control={form.control}
+          label={fieldsData.emailOptional.label}
           name="email"
           type="email"
         />
         <FormInput
           control={form.control}
-          label="Password*"
+          label={fieldsData.passwordRequired.label}
           name="password"
           type="password"
         />
 
         <Button className="uppercase font-semibold font-barlow-condensed text-base">
-          Register
+          {registerData.submitButton}
         </Button>
       </FieldGroup>
     </form>

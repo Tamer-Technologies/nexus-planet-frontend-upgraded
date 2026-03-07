@@ -6,9 +6,12 @@ import { useRef } from "react";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { HOME_CONTENT } from "@/constants/marketing/home";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
+
+const data = HOME_CONTENT.reportBug;
 
 const ReportBug = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -45,7 +48,7 @@ const ReportBug = () => {
         className="min-h-svh bg-background py-32 px-10 size-full relative flex flex-col items-center gap-5"
       >
         <h2 className="section-header text-6xl text-center text-primary font-bold uppercase font-barlow-condensed flex flex-col items-center gap-5">
-          <span>Report a bug</span>
+          <span>{data.title}</span>
           <div className="size-15">
             <svg
               width="319"

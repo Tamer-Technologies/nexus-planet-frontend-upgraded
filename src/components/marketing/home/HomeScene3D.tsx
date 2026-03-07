@@ -10,8 +10,13 @@ import { Progress } from "@/components/ui/progress";
 import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
 import { Button } from "@/components/ui/button";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { HOME_CONTENT } from "@/constants/marketing/home";
+import { SHARED_UI_CONTENT } from "@/constants/shared/ui";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const accessibility = SHARED_UI_CONTENT.accessibility;
+const data = HOME_CONTENT.hero;
 
 const HomeScene3D = () => {
   const { progress } = useProgress();
@@ -29,6 +34,7 @@ const HomeScene3D = () => {
           autoAlpha: 0,
           duration: 0.8,
           ease: "power2.inOut",
+          delay: 1,
         });
         ScrollTrigger.create({
           trigger: containerRef.current,
@@ -62,7 +68,7 @@ const HomeScene3D = () => {
       >
         <div className="flex flex-col items-center max-w-130 w-full">
           <div className="font-bold text-primary font-barlow-condensed flex w-full items-center">
-            <span>Getting everything ready for you</span>
+            <span>{data.progressBar.label}</span>
             <span className="block text-3xl ml-auto">
               {progress.toFixed(0)}%
             </span>
@@ -73,6 +79,7 @@ const HomeScene3D = () => {
 
       <div className="sticky top-0 w-full h-screen overflow-hidden">
         <Canvas
+          dpr={[1, 1.5]}
           frameloop={isRendering ? "always" : "never"}
           className="fixed-canvas-container"
         >
@@ -92,14 +99,18 @@ const HomeScene3D = () => {
         </Canvas>
         <section className="absolute inset-0 flex justify-center items-center p-10 pointer-events-none">
           <h1>
-            <span className="sr-only">WELCOME TO YOUR NEXUS PLANET</span>
+            <span className="sr-only">
+              {data.welcome} {data.brand}
+            </span>
           </h1>
           <p
             ref={animRefs.subTitleRef}
             className="uppercase font-bold font-barlow-condensed text-center text-2xl max-w-90 sm:text-3xl sm:max-w-113 lg:text-4xl lg:max-w-130 xl:text-6xl xl:max-w-220"
           >
-            The self-hosted social media platform built for ultimate control and
-            <span className="text-primary">&nbsp;privacy.</span>
+            {data.subTitle.main}
+            <span className="text-primary">
+              &nbsp;{data.subTitle.highlight}
+            </span>
           </p>
         </section>
 
@@ -141,8 +152,8 @@ const HomeScene3D = () => {
               <p className="blackhole-msg-2 absolute top-0 left-0 opacity-0 text-xl text-white/70 font-barlow-condensed">
                 <span className="font-bold text-primary">Unfortunately </span>I
                 will have to
-                <span className="font-bold text-primary"> suck</span> you. Don’t
-                worry tho, You won’t turn into spaghetti 🍝
+                <span className="font-bold text-primary"> absorb</span> you.
+                Don’t worry tho, You won’t turn into spaghetti 🍝
               </p>
             </div>
           </div>
@@ -153,7 +164,9 @@ const HomeScene3D = () => {
           variant={"default"}
           onClick={() => setIsMotionReduced(!isMotionReduced)}
         >
-          {isMotionReduced ? "Enable Motion" : "Reduce Motion"}
+          {isMotionReduced
+            ? accessibility.enableMotion
+            : accessibility.disableMotion}
         </Button>
       </div>
     </div>

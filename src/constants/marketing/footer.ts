@@ -5,7 +5,7 @@ export const FOOTER_DATA = {
       "Your gateway to a decentralized space. Chat, explore, and build your own star community.",
     socials: [
       { name: "X", href: "#", icon: "x" },
-      { name: "Discord", href: "#", icon: "discord" },
+      { name: "Reddit", href: "#", icon: "reddit" },
       { name: "Github", href: "#", icon: "github" },
     ],
   },
@@ -14,7 +14,7 @@ export const FOOTER_DATA = {
       title: "Platform",
       links: [
         { label: "Download", href: "/download" },
-        { label: "Nitro", href: "/nitro" },
+        { label: "Nexstro", href: "/nexstro" },
         { label: "Status", href: "/status" },
       ],
     },

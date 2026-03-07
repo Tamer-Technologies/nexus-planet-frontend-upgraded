@@ -106,7 +106,7 @@ const useHomeAnim = ({
                 : {
                     snapTo: "labelsDirectional",
                     delay: 3,
-                    duration: 5,
+                    duration: 6,
                   },
             },
           });

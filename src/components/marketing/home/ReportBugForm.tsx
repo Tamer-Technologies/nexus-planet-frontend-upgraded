@@ -10,12 +10,15 @@ import {
   BUG_SEVERITY,
   reportBugSchema,
 } from "@/constants/auth/reportBugSchema";
+import { HOME_CONTENT } from "@/constants/marketing/home";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ComponentProps } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
 type FormValues = z.infer<typeof reportBugSchema>;
+
+const data = HOME_CONTENT.reportBug;
 
 const ReportBugForm = ({ ...props }: ComponentProps<"form">) => {
   const form = useForm<FormValues>({
@@ -38,31 +41,31 @@ const ReportBugForm = ({ ...props }: ComponentProps<"form">) => {
       <FieldGroup>
         <FormInput
           control={form.control}
-          label="Title*"
           name="title"
-          placeholder="Ex: Voice channel audio cutting out"
+          label={data.inputs.title.label}
+          placeholder={data.inputs.title.placeholder}
         />
         <FormSelect
           control={form.control}
           name="category"
-          label="Category*"
+          label={data.inputs.category.label}
           options={BUG_CATEGORY}
         />
         <FormSelect
           control={form.control}
           name="severity"
-          label="Severity*"
+          label={data.inputs.severity.label}
           options={BUG_SEVERITY}
         />
         <FormTextArea
           control={form.control}
           name="description"
-          label="Description*"
-          placeholder="Ex: I was in a voice call and tried to resize the window, e.g."
+          label={data.inputs.description.label}
+          placeholder={data.inputs.description.placeholder}
         />
 
         <Button className="uppercase font-semibold font-barlow-condensed text-base">
-          Submit Report
+          {data.submitButton}
         </Button>
       </FieldGroup>
     </form>

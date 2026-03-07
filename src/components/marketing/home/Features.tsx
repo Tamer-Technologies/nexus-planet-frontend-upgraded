@@ -1,5 +1,6 @@
 "use client";
 
+import { HOME_CONTENT } from "@/constants/marketing/home";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
@@ -11,23 +12,7 @@ gsap.registerPlugin(DrawSVGPlugin);
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrollTrigger);
 
-const featuresList = [
-  {
-    label: "SOVEREIGNTY",
-    description:
-      "Install Nexus Planet on any private server or VPS. You manage user access, storage, and moderation rules. Your private server is your universe, completely dedicated to your community's needs and governance.",
-  },
-  {
-    label: "COMMUNICATION",
-    description:
-      "Create dedicated servers (communities) that host multiple text and voice channels, just like the tools you love. Enjoy direct messaging and group calls with a modern, intuitive interface. All communications utilize end-to-end encryption.",
-  },
-  {
-    label: "CUSTOMIZATION",
-    description:
-      "Extensive API and modification tools allow deep customization of themes, functionalities, and integrations. Nexus Planet is a starting point, not a finished product—you decide what it becomes.",
-  },
-];
+const data = HOME_CONTENT.features;
 
 const Features = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,7 +42,7 @@ const Features = () => {
         duration: 1,
       });
 
-      featuresList.forEach((_, index) => {
+      data.items.forEach((_, index) => {
         const titleSplit = SplitText.create(`.feature-title-${index + 1}`, {
           type: "lines",
           mask: "lines",
@@ -73,7 +58,7 @@ const Features = () => {
 
         tl.from(descSplit.lines, { yPercent: 100 });
 
-        if (index !== featuresList.length - 1) {
+        if (index !== data.items.length - 1) {
           tl.from(`.separation-line-${index + 1}`, {
             clipPath: "inset(0% 0% 100% 0%)",
           });
@@ -96,7 +81,7 @@ const Features = () => {
       <div className="flex flex-col items-center py-32 px-10 gap-28.75">
         <div className="relative">
           <h2 className="text-6xl text-primary font-bold uppercase font-barlow-condensed section-title">
-            Features
+            {data.title}
           </h2>
           <svg
             width="14"
@@ -115,7 +100,7 @@ const Features = () => {
         </div>
 
         <div className="flex flex-col gap-2 max-w-68 text-center">
-          {featuresList.map((item, index) => (
+          {data.items.map((item, index) => (
             <Fragment key={item.label}>
               <div
                 className={`uppercase font-barlow-condensed flex flex-col gap-2.5  
@@ -130,7 +115,7 @@ const Features = () => {
                   {item.description}
                 </p>
               </div>
-              {index !== featuresList.length - 1 && (
+              {index !== data.items.length - 1 && (
                 <div
                   className={`bg-primary w-px h-28 mx-auto separation-line-${index + 1}`}
                 />

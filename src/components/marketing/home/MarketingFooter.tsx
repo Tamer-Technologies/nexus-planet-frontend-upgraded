@@ -1,10 +1,12 @@
-import { FOOTER_DATA } from "@/constants/marketing/marketingFooter";
+import { FOOTER_DATA } from "@/constants/marketing/footer";
 import {
-  IconBrandDiscord,
   IconBrandGithub,
+  IconBrandReddit,
   IconBrandX,
   IconWorld,
 } from "@tabler/icons-react";
+
+const data = FOOTER_DATA;
 
 export default function MarketingFooter() {
   return (
@@ -14,13 +16,13 @@ export default function MarketingFooter() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-bold tracking-tighter text-primary mb-4">
-              {FOOTER_DATA.brand.name}
+              {data.brand.name}
             </h2>
             <p className="text-muted-foreground max-w-sm mb-6 leading-relaxed">
-              {FOOTER_DATA.brand.description}
+              {data.brand.description}
             </p>
             <div className="flex gap-4">
-              {FOOTER_DATA.brand.socials.map((social) => (
+              {data.brand.socials.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
@@ -29,7 +31,7 @@ export default function MarketingFooter() {
                   className="p-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-all"
                 >
                   {social.name === "X" && <IconBrandX size={20} />}
-                  {social.name === "Discord" && <IconBrandDiscord size={20} />}
+                  {social.name === "Reddit" && <IconBrandReddit size={20} />}
                   {social.name === "Github" && <IconBrandGithub size={20} />}
                 </a>
               ))}
@@ -37,7 +39,7 @@ export default function MarketingFooter() {
           </div>
 
           {/* Dynamic Links Sections */}
-          {FOOTER_DATA.sections.map((section) => (
+          {data.sections.map((section) => (
             <div key={section.title}>
               <h3 className="text-foreground font-semibold mb-5 text-sm uppercase tracking-widest p-2">
                 {section.title}
@@ -68,8 +70,8 @@ export default function MarketingFooter() {
           </div>
 
           <p className="text-xs text-muted-foreground/60">
-            © {new Date().getFullYear()} {FOOTER_DATA.brand.name}. Built for the
-            star community
+            © {new Date().getFullYear()} {data.brand.name}. Built for the star
+            community
           </p>
         </div>
       </div>

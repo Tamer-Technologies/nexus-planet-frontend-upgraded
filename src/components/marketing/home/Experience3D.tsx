@@ -11,8 +11,11 @@ import { useState } from "react";
 import { useLandingPage } from "@/contexts/marketing/LandingPageContext";
 import Blackhole3d from "./Blackhole3d";
 import { degToRad } from "@/utils/threeUtils";
+import { HOME_CONTENT } from "@/constants/marketing/home";
 
 const FONT_URL = "/fonts/barlow-condensed-3d/700.ttf";
+
+const data = HOME_CONTENT.hero;
 
 export const Experience = () => {
   const { animRefs, getIsMotionReduced, setIsMotionReduced } = useLandingPage();
@@ -37,11 +40,11 @@ export const Experience = () => {
 
       <group position={[0, 0.9, 0]} scale={0.25} ref={animRefs.titleRef}>
         <Text color="#999999" position={[0, 2.4, 0]} font={FONT_URL}>
-          WELCOME TO YOUR
+          {data.welcome}
         </Text>
 
         <Text color="#fbbf24" position={[0, 1.2, 0]} font={FONT_URL}>
-          NEXUS PLANET
+          {data.brand}
         </Text>
       </group>
 
@@ -63,7 +66,7 @@ export const Experience = () => {
                   rel="noopener noreferrer"
                   className="block cursor-none h-45 w-42"
                 >
-                  <span className="sr-only">Star our repo in github</span>
+                  <span className="sr-only">{data.githubStarAria}</span>
                 </a>
               </h2>
             </section>
