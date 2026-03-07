@@ -2,7 +2,7 @@ export const FOOTER_DATA = {
   brand: {
     name: "NEXUS PLANET",
     description:
-      "Your gateway to a decentralized space. Chat, explore, and build your own star community.",
+      "Modern open-source communication for teams and communities. Connect, collaborate, and build in a space that belongs to everyone.",
     socials: [
       { name: "X", href: "#", icon: "x" },
       { name: "Reddit", href: "#", icon: "reddit" },

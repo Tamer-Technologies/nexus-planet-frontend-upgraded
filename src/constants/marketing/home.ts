@@ -1,11 +1,11 @@
 export const HOME_CONTENT = {
   hero: {
-    progressBar: { label: "Getting verything ready for you" },
+    progressBar: { label: "Establishing secure connection..." },
     welcome: "WELCOME TO YOUR",
     brand: "NEXUS PLANET",
     subTitle: {
-      main: "The self-hosted social media platform built for ultimate control and",
-      highlight: "privacy.",
+      main: "The next-generation open-source communication platform built for ultimate control and",
+      highlight: "collaboration.",
     },
     githubStarAria: "Star our repo in github",
   },
@@ -13,19 +13,19 @@ export const HOME_CONTENT = {
     title: "Features",
     items: [
       {
-        label: "SOVEREIGNTY",
+        label: "OPEN SOURCE",
         description:
-          "Install Nexus Planet on any private server or VPS. You manage user access, storage, and moderation rules. Your private server is your universe, completely dedicated to your community's needs and governance.",
+          "Built on transparency and community-driven development. Nexus Planet is fully open source, allowing developers to contribute, audit, and improve the core platform together.",
       },
       {
-        label: "COMMUNICATION",
+        label: "REAL-TIME CHANNELS",
         description:
-          "Create dedicated servers (communities) that host multiple text and voice channels, just like the tools you love. Enjoy direct messaging and group calls with a modern, intuitive interface. All communications utilize end-to-end encryption.",
+          "Experience high-fidelity voice and text communication. Create dedicated spaces for your projects with a modern interface designed for fast-paced team interactions.",
       },
       {
-        label: "CUSTOMIZATION",
+        label: "MODULAR DESIGN",
         description:
-          "Extensive API and modification tools allow deep customization of themes, functionalities, and integrations. Nexus Planet is a starting point, not a finished product—you decide what it becomes.",
+          "Extensive API and modification tools allow you to tailor the experience. Nexus Planet is designed to be a flexible foundation that grows with your community's needs.",
       },
     ],
   },
@@ -35,14 +35,14 @@ export const HOME_CONTENT = {
     inputs: {
       title: {
         label: "Title*",
-        placeholder: "Ex: Voice channel audio cutting out",
+        placeholder: "Ex: User interface alignment issue",
       },
       category: { label: "Category*" },
       severity: { label: "Severity*" },
       description: {
         label: "Description*",
         placeholder:
-          "Ex: I was in a voice call and tried to resize the window, e.g.",
+          "Ex: Describe the issue you encountered during your session.",
       },
     },
   },

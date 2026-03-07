@@ -99,7 +99,7 @@ const Features = () => {
           </svg>
         </div>
 
-        <div className="flex flex-col gap-2 max-w-68 text-center">
+        <div className="flex flex-col gap-2 max-w-72 text-center">
           {data.items.map((item, index) => (
             <Fragment key={item.label}>
               <div

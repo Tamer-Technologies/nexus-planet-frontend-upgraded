@@ -23,8 +23,7 @@ export const metadata: Metadata = {
     default: "Nexus Planet",
     template: "Nexus Planet | %s",
   },
-  description:
-    "The self-hosted social media platform built for ultimate control and privacy.",
+  description: "Modern open-source communication platform",
   icons: {
     icon: "/favicon.png",
   },
