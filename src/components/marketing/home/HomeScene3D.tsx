@@ -160,7 +160,7 @@ const HomeScene3D = () => {
         </div>
 
         <Button
-          className="absolute reduce-motion-btn bottom-5 right-5 font-semibold font-barlow-condensed text-lg cursor-none"
+          className="absolute reduce-motion-btn bottom-5 right-5 font-semibold font-barlow-condensed text-lg "
           variant={"default"}
           onClick={() => setIsMotionReduced(!isMotionReduced)}
         >

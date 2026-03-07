@@ -54,10 +54,12 @@ const CustomCursor = () => {
   });
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 size-8 border-white/50 border-2 rounded-full z-101 pointer-events-none"
-    />
+    <div className="max-lg:hidden">
+      <div
+        ref={cursorRef}
+        className="fixed top-0 left-0 size-8 border-white/50 border-2 rounded-full z-101 pointer-events-none"
+      />
+    </div>
   );
 };
 

@@ -39,7 +39,7 @@ export const PageTransition = ({
   return (
     <PageTransitionContext.Provider value={tlRef}>
       <div
-        className="fixed bg-black inset-0 z-50 cursor-none opacity-0"
+        className="fixed bg-black inset-0 z-50  opacity-0"
         ref={transLayerRef}
       />
       {children}

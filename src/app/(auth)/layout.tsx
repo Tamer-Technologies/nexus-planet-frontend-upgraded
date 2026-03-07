@@ -12,7 +12,7 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="cursor-none">
+    <div>
       <MarketingHeader />
       <CustomCursor />
       <main className="min-h-svh">{children}</main>

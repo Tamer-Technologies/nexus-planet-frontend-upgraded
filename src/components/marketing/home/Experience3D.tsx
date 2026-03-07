@@ -64,7 +64,7 @@ export const Experience = () => {
                   href="https://github.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block cursor-none h-45 w-42"
+                  className="block  h-45 w-42"
                 >
                   <span className="sr-only">{data.githubStarAria}</span>
                 </a>

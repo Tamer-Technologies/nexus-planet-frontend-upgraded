@@ -29,7 +29,6 @@ const NavList = ({
         <div key={item.label} className={containerClassName}>
           <Button
             asChild
-            cursor="noCursor"
             variant="lite"
             className={cn(
               "font-barlow-condensed uppercase font-semibold",
@@ -106,7 +105,7 @@ const MarketingHeader = () => {
       className="fixed flex w-full items-center top-0 left-0 z-100 p-7 gap-5"
       ref={containerRef}
     >
-      <TransitionLink href={data.home.url} className="mr-auto cursor-none">
+      <TransitionLink href={data.home.url} className="mr-auto">
         <Logo className="-translate-y-[15%] pointer-events-none" />
       </TransitionLink>
 
@@ -117,7 +116,6 @@ const MarketingHeader = () => {
 
         <Button
           variant="lite"
-          cursor={"noCursor"}
           size={"auto"}
           className="group p-3 hover:cursor-pointer"
           aria-label={
