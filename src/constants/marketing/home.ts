@@ -1,11 +1,11 @@
 export const HOME_CONTENT = {
   hero: {
-    progressBar: { label: "Establishing secure connection..." },
+    progressBar: { label: "Syncing with Nexus Core..." },
     welcome: "WELCOME TO YOUR",
     brand: "NEXUS PLANET",
     subTitle: {
-      main: "The next-generation open-source communication platform built for ultimate control and",
-      highlight: "collaboration.",
+      main: "A transparent community-driven space built for modern digital",
+      highlight: "interaction.",
     },
     githubStarAria: "Star our repo in github",
   },
