@@ -21,7 +21,7 @@ const page = () => {
           <LoginForm />
         </div>
         <Button asChild variant={"link"} className="inline-block">
-          <TransitionLink href={data.redirectLink}>
+          <TransitionLink href={AUTH_CONTENT.register.redirectLink}>
             {data.redirectPrompt}
           </TransitionLink>
         </Button>

@@ -27,7 +27,7 @@ const Blackhole3d = ({
         uTime: { value: 0 },
         uColor1: { value: new THREE.Color(diskColor1) },
         uColor2: { value: new THREE.Color(diskColor2) },
-        uOpacity: { value: opacity }, // تعريف الـ Uniform
+        uOpacity: { value: opacity },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -42,7 +42,7 @@ const Blackhole3d = ({
       fragmentShader: `
         varying vec2 vUv;
         uniform float uTime;
-        uniform float uOpacity; // استلام الـ Uniform
+        uniform float uOpacity;
         uniform vec3 uColor1;
         uniform vec3 uColor2;
         #include <fog_pars_fragment>
@@ -65,7 +65,6 @@ const Blackhole3d = ({
 
             vec3 finalColor = mix(uColor1, uColor2, noise + 0.5);
 
-            // ضرب الـ alpha النهائي في uOpacity
             float alpha = mask * (0.5 + noise * 0.5) * uOpacity;
             
             gl_FragColor = vec4(finalColor * 2.0, alpha);
