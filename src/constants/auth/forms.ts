@@ -4,14 +4,14 @@ export const AUTH_CONTENT = {
     heading: "Sign In",
     submitButton: "Login",
     redirectPrompt: "don't have an account?",
-    redirectLink: "/register",
+    redirectLink: "/login",
   },
   register: {
     pageTitle: "Sign up",
     heading: "Sign Up",
     submitButton: "Register",
     redirectPrompt: "have an account already?",
-    redirectLink: "/login",
+    redirectLink: "/register",
   },
   fields: {
     username: { label: "Username" },
