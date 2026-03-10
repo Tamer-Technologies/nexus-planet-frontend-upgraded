@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div className="flex h-svh min-h-185 items-center justify-center px-5">
+    <div className="flex h-svh min-h-230 items-center justify-center px-5">
       <div className="border w-full max-w-100 p-10 rounded-2xl flex flex-col items-center gap-7">
         <h1 className="uppercase font-semibold font-barlow-condensed text-6xl  text-center">
           {data.heading}
