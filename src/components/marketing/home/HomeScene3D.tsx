@@ -66,7 +66,7 @@ const HomeScene3D = () => {
         ref={loadingLayerRef}
         className="fixed inset-0 bg-black z-50 flex flex-col justify-center items-center"
       >
-        <div className="flex flex-col items-center max-w-130 w-full">
+        <div className="flex flex-col items-center max-w-130 w-full px-10">
           <div className="font-bold text-primary font-barlow-condensed flex w-full items-center">
             <span>{data.progressBar.label}</span>
             <span className="block text-3xl ml-auto">
@@ -108,9 +108,7 @@ const HomeScene3D = () => {
             className="uppercase font-bold font-barlow-condensed text-center text-2xl max-w-90 sm:text-3xl sm:max-w-113 lg:text-4xl lg:max-w-130 xl:text-6xl xl:max-w-220"
           >
             {data.subTitle.main}
-            <span className="text-primary">
-              &nbsp;{data.subTitle.highlight}
-            </span>
+            <span className="text-primary"> {data.subTitle.highlight}</span>
           </p>
         </section>
 
